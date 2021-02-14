@@ -10,14 +10,14 @@ import Home from '.'
 
 const props = {
   banners: bannerMock,
-  freeGames: gamesMock,
+  freeGames: [gamesMock[0]],
   freeHighlight: highlightMock,
-  mostPopularGames: gamesMock,
+  mostPopularGames: [gamesMock[0]],
   mostPopularHighlight: highlightMock,
-  newGames: gamesMock,
-  upcommingGames: gamesMock,
+  newGames: [gamesMock[0]],
+  upcommingGames: [gamesMock[0]],
   upcommingHighlight: highlightMock,
-  upcommingMoreGames: gamesMock
+  upcommingMoreGames: [gamesMock[0]]
 }
 
 describe('<Home />', () => {
@@ -55,7 +55,7 @@ describe('<Home />', () => {
     // banner
     expect(screen.getAllByText(/defy death 1/i)).toHaveLength(1)
     // card game ( 5 sections com 4 cards cada = 5x4 = 20)
-    expect(screen.getAllByText(/population zero/i)).toHaveLength(20)
+    expect(screen.getAllByText(/population zero/i)).toHaveLength(5)
     // highlight
     expect(screen.getAllByText(/red dead is back!/i)).toHaveLength(3)
   })

@@ -7,7 +7,6 @@ import GameCardSlider from 'components/GameCardSlider'
 import Heading from 'components/Heading'
 import Highlight, { HighlightProps } from 'components/Highlight'
 import Menu from 'components/Menu'
-
 import * as S from './styles'
 
 export type HomeTemplateProps = {

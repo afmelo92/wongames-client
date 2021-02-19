@@ -10,53 +10,62 @@ import Home from '.'
 
 const props = {
   banners: bannerMock,
-  freeGames: [gamesMock[0]],
+  freeGames: gamesMock,
   freeHighlight: highlightMock,
-  mostPopularGames: [gamesMock[0]],
+  mostPopularGames: gamesMock,
   mostPopularHighlight: highlightMock,
-  newGames: [gamesMock[0]],
-  upcommingGames: [gamesMock[0]],
+  newGames: gamesMock,
+  upcommingGames: gamesMock,
   upcommingHighlight: highlightMock,
-  upcommingMoreGames: [gamesMock[0]]
+  upcommingMoreGames: gamesMock
 }
+
+jest.mock('components/Menu', () => {
+  return {
+    __esModule: true,
+    default: function Mock() {
+      return <div data-testid="Mock Menu"></div>
+    }
+  }
+})
+
+jest.mock('components/Footer', () => {
+  return {
+    __esModule: true,
+    default: function Mock() {
+      return <div data-testid="Mock Footer"></div>
+    }
+  }
+})
+
+jest.mock('components/Showcase', () => {
+  return {
+    __esModule: true,
+    default: function Mock() {
+      return <div data-testid="Mock Showcase"></div>
+    }
+  }
+})
+
+jest.mock('components/BannerSlider', () => {
+  return {
+    __esModule: true,
+    default: function Mock() {
+      return <div data-testid="Mock Banner Slider"></div>
+    }
+  }
+})
 
 describe('<Home />', () => {
   it('should render menu and footer', () => {
     renderWithTheme(<Home {...props} />)
 
-    expect(screen.getByLabelText(/open menu/i)).toBeInTheDocument()
-    expect(
-      screen.getByRole('heading', { name: /follow us/i })
-    ).toBeInTheDocument()
+    expect(screen.getByTestId('Mock Menu')).toBeInTheDocument()
 
-    expect(screen.getAllByRole('img', { name: /won games/i })).toHaveLength(2)
-  })
+    expect(screen.getByTestId('Mock Banner Slider')).toBeInTheDocument()
 
-  it('should render all sections', () => {
-    renderWithTheme(<Home {...props} />)
+    expect(screen.getAllByTestId('Mock Showcase')).toHaveLength(5)
 
-    expect(screen.getByRole('heading', { name: /news/i })).toBeInTheDocument()
-
-    expect(
-      screen.getByRole('heading', { name: /most popular/i })
-    ).toBeInTheDocument()
-
-    expect(
-      screen.getByRole('heading', { name: /upcomming/i })
-    ).toBeInTheDocument()
-
-    expect(
-      screen.getByRole('heading', { name: /free games/i })
-    ).toBeInTheDocument()
-  })
-
-  it('should render section elements', () => {
-    renderWithTheme(<Home {...props} />)
-    // banner
-    expect(screen.getAllByText(/defy death 1/i)).toHaveLength(1)
-    // card game ( 5 sections com 4 cards cada = 5x4 = 20)
-    expect(screen.getAllByText(/population zero/i)).toHaveLength(5)
-    // highlight
-    expect(screen.getAllByText(/red dead is back!/i)).toHaveLength(3)
+    expect(screen.getByTestId('Mock Footer')).toBeInTheDocument()
   })
 })

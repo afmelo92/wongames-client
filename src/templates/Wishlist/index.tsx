@@ -1,18 +1,20 @@
 import Heading from 'components/Heading'
+import Showcase from 'components/Showcase'
+
 import Base from 'templates/Base'
+
 import { Container } from 'components/Container'
 import { GameCardProps } from 'components/GameCard'
 import { HighlightProps } from 'components/Highlight'
 
-import * as S from './styles'
-import Showcase from 'components/Showcase'
+// import * as S from './styles'
 
 export type WishlistTemplateProps = {
   recommendedGames: GameCardProps[]
   recommendedHighlight: HighlightProps
 }
 
-const WishList = ({
+const Wishlist = ({
   recommendedGames,
   recommendedHighlight
 }: WishlistTemplateProps) => (
@@ -31,4 +33,4 @@ const WishList = ({
   </Base>
 )
 
-export default WishList
+export default Wishlist

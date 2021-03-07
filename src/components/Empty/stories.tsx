@@ -3,12 +3,7 @@ import Empty, { EmptyProps } from '.'
 
 export default {
   title: 'Empty',
-  component: Empty,
-  parameters: {
-    backgrounds: {
-      default: 'won-dark'
-    }
-  }
+  component: Empty
 } as Meta
 
 export const Default: Story<EmptyProps> = args => <Empty {...args} />

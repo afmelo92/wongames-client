@@ -1,7 +1,20 @@
-import React from 'react'
+import OrdersList, { OrdersListProps } from 'components/OrdersList'
+import Profile from 'templates/Profile'
 
-// import { Container } from './styles';
+import ordersMock from 'components/OrdersList/mock'
 
-export default function ProfileOrdersPage() {
-  return <h1>Orders</h1>
+export default function ProfileOrdersPage({ items }: OrdersListProps) {
+  return (
+    <Profile>
+      <OrdersList items={items} />
+    </Profile>
+  )
+}
+
+export function getServerSideProps() {
+  return {
+    props: {
+      items: ordersMock
+    }
+  }
 }

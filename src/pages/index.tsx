@@ -3,13 +3,11 @@ import bannersMock from 'components/BannerSlider/mock'
 import gamesMock from 'components/GameCardSlider/mock'
 import highlightMock from 'components/Highlight/mock'
 
-const Index = (props: HomeTemplateProps) => {
+export default function Index(props: HomeTemplateProps) {
   return <Home {...props} />
 }
 
-export default Index
-
-export function getStaticProps() {
+export async function getServerSideProps() {
   return {
     props: {
       banners: bannersMock,

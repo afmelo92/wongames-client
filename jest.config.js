@@ -8,7 +8,8 @@ module.exports = {
     '!src/pages/**/*.tsx', //adicionei '(_)?' para que pular _app.tsx, _document.tsx, etc.
     '!src/styles/**/*.ts',
     '!src/utils/apollo.ts',
-    '!src/types/**/*.d.ts'
+    '!src/types/**/*.d.ts',
+    '!src/graphql/**/*.ts'
   ],
   setupFilesAfterEnv: ['<rootDir>/.jest/setup.ts'],
   modulePaths: ['<rootDir>/src/', '<rootDir>/.jest']

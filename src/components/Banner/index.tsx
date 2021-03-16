@@ -8,8 +8,8 @@ export type BannerProps = {
   img: string
   title: string
   subtitle: string
-  buttonLabel: string
-  buttonLink: string
+  buttonLabel?: string
+  buttonLink?: string
   ribbon?: React.ReactNode
   ribbonColor?: RibbonColors
   ribbonSize?: RibbonSizes
@@ -36,9 +36,12 @@ const Banner = ({
     <S.Caption>
       <S.Title>{title}</S.Title>
       <S.Subtitle dangerouslySetInnerHTML={{ __html: subtitle }} />
-      <Button as="a" href={buttonLink} size="large">
-        {buttonLabel}
-      </Button>
+
+      {!!buttonLabel && (
+        <Button as="a" href={buttonLink} size="large">
+          {buttonLabel}
+        </Button>
+      )}
     </S.Caption>
   </S.Wrapper>
 )

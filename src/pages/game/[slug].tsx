@@ -1,7 +1,5 @@
 import Game, { GameTemplateProps } from 'templates/Game'
 
-import gamesMock from 'components/GameCardSlider/mock'
-import highlightsMock from 'components/Highlight/mock'
 import { useRouter } from 'next/router'
 import { initializeApollo } from 'utils/apollo'
 import { QueryGames, QueryGamesVariables } from 'graphql/generated/QueryGames'
@@ -13,7 +11,12 @@ import {
 import { GetStaticPaths, GetStaticProps } from 'next'
 import { QueryRecommended } from 'graphql/generated/QueryRecommended'
 import { QUERY_RECOMMENDED } from 'graphql/queries/recommended'
-import { gamesMapper } from 'utils/mappers'
+import { gamesMapper, highlightMapper } from 'utils/mappers'
+import { QUERY_UPCOMING } from 'graphql/queries/upcoming'
+import {
+  QueryUpcoming,
+  QueryUpcomingVariables
+} from 'graphql/generated/QueryUpcoming'
 
 const apolloClient = initializeApollo()
 
@@ -57,9 +60,19 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     query: QUERY_RECOMMENDED
   })
 
+  const TODAY = new Date().toISOString().slice(0, 10)
+
+  const { data: upcoming } = await apolloClient.query<
+    QueryUpcoming,
+    QueryUpcomingVariables
+  >({
+    query: QUERY_UPCOMING,
+    variables: { date: TODAY }
+  })
+
   return {
     props: {
-      revalidate: 60,
+      revalidate: 10,
       cover: `http://localhost:1338${game.cover?.src}`,
       gameInfo: {
         title: game.name,
@@ -79,8 +92,11 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
         rating: game.rating,
         genres: game.categories.map(category => category.name)
       },
-      upcomingGames: gamesMock,
-      upcomingHighlight: highlightsMock,
+      upcomingTitle: upcoming.showcase?.upcomingGames?.title,
+      upcomingGames: gamesMapper(upcoming.upcomingGames),
+      upcomingHighlight: highlightMapper(
+        upcoming.showcase?.upcomingGames?.highlight
+      ),
       recommendedTitle: recommended.recommended?.section?.title,
       recommendedGames: gamesMapper(recommended.recommended?.section?.games)
     }

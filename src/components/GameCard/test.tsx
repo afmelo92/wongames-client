@@ -46,6 +46,12 @@ describe('<GameCard />', () => {
     expect(price).toHaveStyle({ backgroundColor: theme.colors.secondary })
   })
 
+  it('should render FREE when pruice is 0', () => {
+    renderWithTheme(<GameCard {...props} price={0} />)
+
+    expect(screen.getByText(/free/i)).toBeInTheDocument()
+  })
+
   it('should render a line-through in price when promotional', () => {
     renderWithTheme(<GameCard {...props} promotionalPrice={15} />)
     screen.getByText('$235.00')

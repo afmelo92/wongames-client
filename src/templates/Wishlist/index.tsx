@@ -27,12 +27,6 @@ const Wishlist = ({
         Wishlist
       </Heading>
 
-      {/* <Grid>
-        {games?.map((game, index) => (
-          <GameCard key={`wishlist-${index}`} {...game} />
-        ))}
-      </Grid> */}
-
       {games.length ? (
         <Grid>
           {games?.map((game, index) => (

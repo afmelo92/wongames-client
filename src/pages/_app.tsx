@@ -1,19 +1,14 @@
 import { ApolloProvider } from '@apollo/client'
-
-import type { AppProps /*, AppContext */, NextWebVitalsMetric } from 'next/app'
-import Head from 'next/head'
 import { ThemeProvider } from 'styled-components'
+import { AppProps } from 'next/app'
+import Head from 'next/head'
 
 import GlobalStyles from 'styles/global'
 import theme from 'styles/theme'
 import { useApollo } from 'utils/apollo'
 
-export function reportWebVitals(metric: NextWebVitalsMetric) {
-  console.log(metric)
-}
-
 function App({ Component, pageProps }: AppProps) {
-  const client = useApollo(pageProps.initialApoloState)
+  const client = useApollo(pageProps.initialApolloState)
 
   return (
     <ApolloProvider client={client}>
@@ -25,11 +20,11 @@ function App({ Component, pageProps }: AppProps) {
           <link rel="manifest" href="/manifest.json" />
           <meta
             name="description"
-            content="The best Game Store in the world!"
+            content="The best Game Stores in the world!"
           />
         </Head>
-        <Component {...pageProps} />
         <GlobalStyles />
+        <Component {...pageProps} />
       </ThemeProvider>
     </ApolloProvider>
   )

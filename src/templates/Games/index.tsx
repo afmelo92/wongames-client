@@ -1,23 +1,38 @@
-import ExploreSidebar, { ItemProps } from 'components/ExploreSidebar'
-import GameCard, { GameCardProps } from 'components/GameCard'
-import Grid from 'components/Grid'
-import Base from 'templates/Base'
+import { ParsedUrlQueryInput } from 'querystring'
+import { useRouter } from 'next/router'
 
-import { KeyboardArrowDown as ArrowDown } from '@styled-icons/material-outlined'
-import * as S from './styles'
 import { useQueryGames } from 'graphql/queries/games'
+import { parseQueryStringToFilter, parseQueryStringToWhere } from 'utils/filter'
+
+import Base from 'templates/Base'
+import { KeyboardArrowDown as ArrowDown } from '@styled-icons/material-outlined/KeyboardArrowDown'
+
+import ExploreSidebar, { ItemProps } from 'components/ExploreSidebar'
+import GameCard from 'components/GameCard'
+import Grid from 'components/Grid'
+
+import * as S from './styles'
 
 export type GamesProps = {
-  games?: GameCardProps[]
   filterItems: ItemProps[]
 }
 
 const Games = ({ filterItems }: GamesProps) => {
+  const { push, query } = useRouter()
+
   const { data, loading, fetchMore } = useQueryGames({
-    variables: { limit: 9 }
+    variables: {
+      limit: 9,
+      where: parseQueryStringToWhere({ queryString: query, filterItems }),
+      sort: query.sort as string | null
+    }
   })
 
-  const handleFilter = () => {
+  const handleFilter = (items: ParsedUrlQueryInput) => {
+    push({
+      pathname: '/games',
+      query: items
+    })
     return
   }
 
@@ -28,25 +43,17 @@ const Games = ({ filterItems }: GamesProps) => {
   return (
     <Base>
       <S.Main>
-        <ExploreSidebar items={filterItems} onFilter={handleFilter} />
+        <ExploreSidebar
+          initialValues={parseQueryStringToFilter({
+            queryString: query,
+            filterItems
+          })}
+          items={filterItems}
+          onFilter={handleFilter}
+        />
 
         {loading ? (
-          <S.Loader>
-            <div className="lds-default" data-testid="loader">
-              <div></div>
-              <div></div>
-              <div></div>
-              <div></div>
-              <div></div>
-              <div></div>
-              <div></div>
-              <div></div>
-              <div></div>
-              <div></div>
-              <div></div>
-              <div></div>
-            </div>
-          </S.Loader>
+          <p>Loading...</p>
         ) : (
           <section>
             <Grid>
@@ -72,4 +79,5 @@ const Games = ({ filterItems }: GamesProps) => {
     </Base>
   )
 }
+
 export default Games

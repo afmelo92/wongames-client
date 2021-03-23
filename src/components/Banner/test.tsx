@@ -1,11 +1,10 @@
-import { screen } from '@testing-library/react'
-import { renderWithTheme } from 'utils/tests/helpers'
+import { render, screen } from 'utils/test-utils'
 
 import Banner from '.'
 
 describe('<Banner />', () => {
   it('should render heading', () => {
-    const { container } = renderWithTheme(
+    const { container } = render(
       <Banner
         img="https://source.unsplash.com/user/willianjusten/1042x580"
         title="Defy death"
@@ -35,7 +34,7 @@ describe('<Banner />', () => {
   })
 
   it('should render a Ribbon', () => {
-    renderWithTheme(
+    render(
       <Banner
         ribbon="My Ribbon"
         ribbonSize="small"

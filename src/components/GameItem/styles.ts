@@ -13,7 +13,9 @@ export const Wrapper = styled.div`
 
 export const GameContent = styled.div`
   display: flex;
+  width: 100%;
 `
+
 export const ImageBox = styled.div`
   ${({ theme }) => css`
     flex-shrink: 0;
@@ -37,6 +39,7 @@ export const Content = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  width: 100%;
 `
 
 export const Title = styled.h3`
@@ -50,6 +53,21 @@ export const Title = styled.h3`
       font-size: 2rem;
       line-height: 2rem;
     `};
+  `}
+`
+
+export const Group = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+`
+
+export const Remove = styled.div`
+  ${({ theme }) => css`
+    cursor: pointer;
+    color: ${theme.colors.primary};
+    font-size: ${theme.font.sizes.small};
   `}
 `
 
@@ -68,6 +86,12 @@ export const DownloadLink = styled.a`
   ${({ theme }) => css`
     color: ${theme.colors.primary};
     margin-left: ${theme.spacings.xxsmall};
+    position: relative;
+    & > svg {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+    }
   `}
 `
 
@@ -79,7 +103,6 @@ export const PaymentContent = styled.div`
     flex-direction: column;
     min-width: 28rem;
     margin-top: ${theme.spacings.xsmall};
-
     ${media.greaterThan('medium')`
       margin-top: 0;
       flex: 1;
@@ -97,7 +120,6 @@ export const CardInfo = styled.div`
     img {
       margin-left: ${theme.spacings.xxsmall};
     }
-
     ${media.lessThan('medium')`
       margin-top: ${theme.spacings.xsmall};
     `}

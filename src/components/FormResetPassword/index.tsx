@@ -7,13 +7,13 @@ import { Lock, ErrorOutline } from '@styled-icons/material-outlined'
 import { FormError, FormLoading, FormWrapper } from 'components/Form'
 import Button from 'components/Button'
 import TextField from 'components/TextField'
-import { FieldErrors } from 'utils/validations'
+import { FieldErrors, resetValidate } from 'utils/validations'
 
 const FormResetPassword = () => {
   const [formError, setFormError] = useState('')
   const [values, setValues] = useState({
     password: '',
-    confirmPassword: ''
+    confirm_password: ''
   })
   const [loading, setLoading] = useState(false)
   const [fieldError, setFieldError] = useState<FieldErrors>({})
@@ -28,7 +28,7 @@ const FormResetPassword = () => {
     event.preventDefault()
     setLoading(true)
 
-    const errors = {}
+    const errors = resetValidate(values)
 
     if (Object.keys(errors).length) {
       setFieldError(errors)

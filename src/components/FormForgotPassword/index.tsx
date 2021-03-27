@@ -7,7 +7,7 @@ import { Email, ErrorOutline } from '@styled-icons/material-outlined'
 import { FormError, FormLoading, FormWrapper } from 'components/Form'
 import Button from 'components/Button'
 import TextField from 'components/TextField'
-import { FieldErrors } from 'utils/validations'
+import { FieldErrors, forgotValidate } from 'utils/validations'
 
 const FormForgotPassword = () => {
   const [formError, setFormError] = useState('')
@@ -27,7 +27,7 @@ const FormForgotPassword = () => {
     event.preventDefault()
     setLoading(true)
 
-    const errors = {}
+    const errors = forgotValidate(values)
 
     if (Object.keys(errors).length) {
       setFieldError(errors)

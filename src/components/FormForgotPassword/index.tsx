@@ -15,12 +15,14 @@ import {
 import Button from 'components/Button'
 import TextField from 'components/TextField'
 import { FieldErrors, forgotValidate } from 'utils/validations'
+import { useRouter } from 'next/router'
 
 const FormForgotPassword = () => {
+  const { query } = useRouter()
   const [success, setSuccess] = useState(false)
   const [formError, setFormError] = useState('')
   const [values, setValues] = useState({
-    email: ''
+    email: (query.email as string) || ''
   })
   const [loading, setLoading] = useState(false)
   const [fieldError, setFieldError] = useState<FieldErrors>({})
@@ -87,6 +89,7 @@ const FormForgotPassword = () => {
               icon={<Email />}
               error={fieldError?.email}
               onInputChange={v => handleInput('email', v)}
+              initialValue={query.email as string}
             />
             <Button type="submit" size="large" fullWidth disabled={loading}>
               {loading ? <FormLoading /> : <span>Send email</span>}

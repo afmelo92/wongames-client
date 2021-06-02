@@ -7,7 +7,7 @@ import formatPrice from 'utils/format-price'
 
 export const bannerMapper = (banners: QueryHome_banners[]) => {
   return banners.map(banner => ({
-    img: `http://localhost:1338${banner.image?.url}`,
+    img: banner.image?.url || null,
     title: banner.title,
     subtitle: banner.subtitle,
     buttonLabel: banner.button?.label,
@@ -26,8 +26,8 @@ export const gamesMapper = (games: QueryGames_games[] | null | undefined) => {
         id: game.id,
         title: game.name,
         slug: game.slug,
-        developer: game.developers[0].name,
-        img: `http://localhost:1338${game.cover?.url}`,
+        developer: game.developers[0]?.name,
+        img: game.cover?.url || null,
         price: game.price
       }))
     : []
@@ -40,8 +40,8 @@ export const highlightMapper = (
     ? {
         title: highlight.title,
         subtitle: highlight.subtitle,
-        backgroundImage: `http://localhost:1338${highlight.background?.url}`,
-        floatImage: `http://localhost:1338${highlight.floatImage?.url}`,
+        backgroundImage: highlight.background?.url || null,
+        floatImage: highlight.floatImage?.url || null,
         buttonLabel: highlight.buttonLabel,
         buttonLink: highlight.buttonLink,
         alignment: highlight.alignment
@@ -53,7 +53,7 @@ export const cartMapper = (games: QueryGames_games[] | undefined) => {
   return games
     ? games.map(game => ({
         id: game.id,
-        img: `http://localhost:1338${game.cover?.url}`,
+        img: game.cover?.url || null,
         title: game.name,
         price: formatPrice(game.price)
       }))

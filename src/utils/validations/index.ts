@@ -36,6 +36,7 @@ export function signUpValidate(values: UsersPermissionsRegisterInput) {
 }
 
 type SignInValues = Omit<UsersPermissionsRegisterInput, 'username'>
+
 export function signInValidate(values: SignInValues) {
   const { email, password } = fieldsValidations
   const schema = Joi.object({ email, password })

@@ -71,7 +71,7 @@ const Games = ({ filterItems }: GamesProps) => {
                     title={game.name}
                     slug={game.slug}
                     developer={game.developers[0].name}
-                    img={`http://localhost:1338${game.cover!.url}`}
+                    img={game.cover!.url || ''}
                     price={game.price}
                   />
                 ))}

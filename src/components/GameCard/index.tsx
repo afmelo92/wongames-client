@@ -52,7 +52,9 @@ const GameCard = ({
           <S.Developer>{developer}</S.Developer>
         </S.Info>
       </Link>
-      <WishlistButton id={id} />
+      <S.FavButton>
+        <WishlistButton id={id} />
+      </S.FavButton>
       <S.BuyBox>
         {!!promotionalPrice && (
           <S.Price isPromotional>{formatPrice(price)}</S.Price>

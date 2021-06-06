@@ -16,6 +16,26 @@ const gameMock = (id: string) => ({
   __typename: 'Game'
 })
 
+export const wishlistMock = {
+  request: {
+    query: QUERY_WISHLIST,
+    context: { session: { jwt: '123' } },
+    variables: {
+      identifier: 'lorem@ipsum.com'
+    }
+  },
+  result: {
+    data: {
+      wishlists: [
+        {
+          id: 1,
+          games: [gameMock('1'), gameMock('2')]
+        }
+      ]
+    }
+  }
+}
+
 export const createWishlistMock = {
   request: {
     query: MUTATION_CREATE_WISHLIST,
@@ -86,33 +106,13 @@ export const removeWishlistMock = {
   }
 }
 
-export const wishlistMock = {
-  request: {
-    query: QUERY_WISHLIST,
-    context: { session: { jwt: '123' } },
-    variables: {
-      identifier: 'lorem@ipsum.com'
-    }
-  },
-  result: {
-    data: {
-      wishlists: [
-        {
-          id: 1,
-          games: [gameMock('1'), gameMock('2')]
-        }
-      ]
-    }
-  }
-}
-
 export const wishlistItems = [
   {
     id: '1',
     title: 'Sample Game 1',
     slug: 'sample-game-1',
     developer: 'sample developer',
-    img: 'http://localhost:1337/sample-game.jpg',
+    img: '/sample-game.jpg',
     price: 10.5
   },
   {
@@ -120,7 +120,7 @@ export const wishlistItems = [
     title: 'Sample Game 2',
     slug: 'sample-game-2',
     developer: 'sample developer',
-    img: 'http://localhost:1337/sample-game.jpg',
+    img: '/sample-game.jpg',
     price: 10.5
   },
   {
@@ -128,7 +128,7 @@ export const wishlistItems = [
     title: 'Sample Game 3',
     slug: 'sample-game-3',
     developer: 'sample developer',
-    img: 'http://localhost:1337/sample-game.jpg',
+    img: '/sample-game.jpg',
     price: 10.5
   }
 ]

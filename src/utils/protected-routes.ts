@@ -5,10 +5,11 @@ async function protectedRoutes(context: GetServerSidePropsContext) {
   const session = await getSession(context)
 
   if (!session) {
-    context.res.writeHead(302, {
-      Location: `/signin?callbackUrl=${context.resolvedUrl}`
-    })
-    context.res.end()
+    context.res.setHeader(
+      'Location',
+      `/signin?callbackUrl=${context.resolvedUrl}`
+    )
+    context.res.statusCode = 302
   }
 
   return session

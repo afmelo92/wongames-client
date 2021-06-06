@@ -1,8 +1,6 @@
 import React from 'react'
 import Cart, { CartProps } from 'templates/Cart'
 
-import itemsMock from 'components/CartList/mock'
-import cardsMock from 'components/PaymentOptions/mock'
 import { initializeApollo } from 'utils/apollo'
 import { QueryRecommended } from 'graphql/generated/QueryRecommended'
 import { QUERY_RECOMMENDED } from 'graphql/queries/recommended'
@@ -14,7 +12,7 @@ export default function CartPage(props: CartProps) {
   return <Cart {...props} />
 }
 
-export async function getStaticProps(context: GetServerSidePropsContext) {
+export async function getServerSideProps(context: GetServerSidePropsContext) {
   const session = await protectedRoutes(context)
   const apolloClient = initializeApollo(null, session)
 
@@ -29,10 +27,7 @@ export async function getStaticProps(context: GetServerSidePropsContext) {
       recommendedGames: gamesMapper(data.recommended?.section?.games),
       recommendedHighlight: highlightMapper(
         data.recommended?.section?.highlight
-      ),
-      items: itemsMock,
-      total: 'R$ 430,00',
-      cards: cardsMock
+      )
     }
   }
 }

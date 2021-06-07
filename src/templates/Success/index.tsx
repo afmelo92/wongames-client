@@ -1,5 +1,7 @@
+import { useEffect } from 'react'
 import { Done } from '@styled-icons/material-outlined/Done'
 import Link from 'next/link'
+import { useCart } from 'hooks/use-cart'
 
 import Base from 'templates/Base'
 
@@ -9,6 +11,7 @@ import Showcase from 'components/Showcase'
 import { HighlightProps } from 'components/Highlight'
 
 import * as S from './styles'
+import { useRouter } from 'next/router'
 
 export type SuccessTemplateProps = {
   recommendedTitle: string
@@ -21,6 +24,17 @@ const Success = ({
   recommendedGames,
   recommendedHighlight
 }: SuccessTemplateProps) => {
+  const { push } = useRouter()
+  const { clearCart } = useCart()
+
+  useEffect(() => {
+    clearCart()
+
+    setTimeout(() => {
+      push('/')
+    }, 5000)
+  }, [])
+
   return (
     <Base>
       <Container>

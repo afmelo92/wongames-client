@@ -61,7 +61,7 @@ const FormForgotPassword = () => {
     setLoading(false)
 
     if (data.error) {
-      setFormError(data.message[0].messages[0].message)
+      setFormError(data?.message[0]?.messages[0]?.message)
     } else {
       setSuccess(true)
     }

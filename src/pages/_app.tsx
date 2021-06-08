@@ -6,6 +6,8 @@ import { useApollo } from 'utils/apollo'
 import { CartProvider } from 'hooks/use-cart'
 import { WishlistProvider } from 'hooks/use-wishlist'
 import { AppProps } from 'next/app'
+import { DefaultSeo } from 'next-seo'
+import SEO from '../../next-seo.config'
 import Head from 'next/head'
 
 import GlobalStyles from 'styles/global'
@@ -30,6 +32,8 @@ function App({ Component, pageProps }: AppProps) {
                   content="The best Game Stores in the world!"
                 />
               </Head>
+              <DefaultSeo {...SEO} />
+
               <GlobalStyles />
               <NextNprogress
                 color="#F231A5"

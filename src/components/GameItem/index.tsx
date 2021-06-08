@@ -8,7 +8,6 @@ export type PaymentInfoProps = {
   img: string
   purchaseDate: string
 }
-
 export type GameItemProps = {
   id: string
   img: string
@@ -62,7 +61,9 @@ const GameItem = ({
           <p>{paymentInfo.purchaseDate}</p>
           <S.CardInfo>
             <span>{paymentInfo.number}</span>
-            <img src={paymentInfo.img} alt={paymentInfo.flag} />
+            {!!paymentInfo.img && (
+              <img src={paymentInfo.img} alt={paymentInfo.flag} />
+            )}
           </S.CardInfo>
         </S.PaymentContent>
       )}

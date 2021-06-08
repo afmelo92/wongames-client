@@ -45,9 +45,9 @@ const Game = ({
     <NextSeo
       title={`${gameInfo.title} - Won Games`}
       description={gameInfo.description}
-      canonical={`https://wongames.willianjusten.com.br/game/${slug}`}
+      canonical={`http://localhost:3000/game/${slug}`}
       openGraph={{
-        url: `https://wongames.willianjusten.com.br/game/${slug}`,
+        url: `http://localhost:3000/game/${slug}`,
         title: `${gameInfo.title} - Won Games`,
         description: gameInfo.description,
         images: [

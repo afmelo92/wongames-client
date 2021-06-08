@@ -4,7 +4,7 @@ import {
   FormatListBulleted
 } from '@styled-icons/material-outlined'
 import { signOut } from 'next-auth/client'
-
+import { useRouter } from 'next/router'
 import Link from 'next/link'
 
 import * as S from './styles'
@@ -14,6 +14,7 @@ export type ProfileMenuProps = {
 }
 
 const ProfileMenu = ({ activeLink }: ProfileMenuProps) => {
+  const { push } = useRouter()
   return (
     <S.Nav>
       <Link href="/profile/me" passHref>
@@ -30,8 +31,14 @@ const ProfileMenu = ({ activeLink }: ProfileMenuProps) => {
         </S.Link>
       </Link>
 
-      <S.Link role="button" onClick={() => signOut()} title="Sign out">
-        <ExitToApp size={24} />
+      <S.Link
+        role="button"
+        onClick={async () => {
+          const data = await signOut({ redirect: false, callbackUrl: '/' })
+          push(data.url)
+        }}
+      >
+        <ExitToApp size={24} title="Sign out" />
         <span>Sign out</span>
       </S.Link>
     </S.Nav>

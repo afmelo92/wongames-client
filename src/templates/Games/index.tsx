@@ -13,6 +13,7 @@ import Grid from 'components/Grid'
 
 import * as S from './styles'
 import Empty from 'components/Empty'
+import { getImageUrl } from 'utils/getImageUrl'
 
 export type GamesProps = {
   filterItems: ItemProps[]
@@ -71,7 +72,7 @@ const Games = ({ filterItems }: GamesProps) => {
                     title={game.name}
                     slug={game.slug}
                     developer={game.developers[0].name}
-                    img={game.cover!.url || ''}
+                    img={`${getImageUrl(game.cover!.url)}`}
                     price={game.price}
                   />
                 ))}
